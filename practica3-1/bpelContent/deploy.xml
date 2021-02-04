@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:comparador="http://comparador" xmlns:empleado="http://empleado" xmlns:iberia="http://iberia" xmlns:vueling="http://vueling">
+  <process name="empleado:Empleado">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="empleado:EmpleadoService" port="EmpleadoPort"/>
+    </provide>
+  </process>
+  <process name="iberia:Iberia">
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="iberia:IberiaService" port="IberiaPort"/>
+    </provide>
+  </process>
+  <process name="vueling:Vueling">
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="vueling:VuelingService" port="VuelingPort"/>
+    </provide>
+  </process>
+  <process name="comparador:Comparador">
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="comparador:ComparadorService" port="ComparadorPort"/>
+    </provide>
+    <invoke partnerLink="Empleado">
+      <service name="empleado:EmpleadoService" port="EmpleadoPort"/>
+    </invoke>
+    <invoke partnerLink="Iberia">
+      <service name="iberia:IberiaService" port="IberiaPort"/>
+    </invoke>
+    <invoke partnerLink="Vueling">
+      <service name="vueling:VuelingService" port="VuelingPort"/>
+    </invoke>
+  </process>
+</deploy>

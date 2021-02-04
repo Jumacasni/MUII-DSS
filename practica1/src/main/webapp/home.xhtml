@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<title>Controller</title>
+	
+	<style>
+		.btn-primary.active{
+			background-color: #12324f;
+		}
+	</style>
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row" style="margin-bottom: 20px">
+				<h2 class="text-center" style="#{motorcontroller.getColorStatus()}">#{motorcontroller.getControllerStatus()}</h2>
+			</div>
+				
+			<div class="">
+				<h:form>
+					<div class="col-md-6 row-block">
+						<h:commandButton class="btn btn-primary btn-block #{motorcontroller.getButtonActive()}" value= "#{motorcontroller.getButtonLabel()}" actionListener="#{motorcontroller.encender()}"/>
+					</div>
+			  		<div class="col-md-6 row-block">
+			  			<h:commandButton class="btn btn-primary btn-block" value="Acelerar" actionListener="#{motorcontroller.acelerar()}" disabled="#{motorcontroller.getAcelerarButton()}"/>
+			  		</div>
+				</h:form>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>
+ 

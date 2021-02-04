@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:comprador="http://comprador" xmlns:preciosProductos="http://preciosProductos" xmlns:regateo="http://regateo" xmlns:vendedor="http://vendedor">
+  <process name="preciosProductos:PreciosProductos">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="preciosProductos:PreciosProductosService" port="PreciosProductosPort"/>
+    </provide>
+  </process>
+  <process name="comprador:Comprador">
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="comprador:CompradorService" port="CompradorPort"/>
+    </provide>
+  </process>
+  <process name="vendedor:Vendedor">
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="vendedor:VendedorService" port="VendedorPort"/>
+    </provide>
+  </process>
+  <process name="regateo:Regateo">
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="regateo:RegateoService" port="RegateoPort"/>
+    </provide>
+    <invoke partnerLink="PreciosProductos">
+      <service name="preciosProductos:PreciosProductosService" port="PreciosProductosPort"/>
+    </invoke>
+    <invoke partnerLink="Comprador">
+      <service name="comprador:CompradorService" port="CompradorPort"/>
+    </invoke>
+    <invoke partnerLink="Vendedor">
+      <service name="vendedor:VendedorService" port="VendedorPort"/>
+    </invoke>
+  </process>
+</deploy>

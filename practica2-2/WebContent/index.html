@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD124BDgOrURnUv2um1aYwTpz4Ewqj06W8&callback=initMap&libraries=&v=weekly" defer></script>
+	<title>Cat&aacute;logo de productos</title>
+
+	<style>
+		.jumbotron {
+			padding: 2rem 2rem;
+		}
+	</style>
+	<script type="text/javascript">
+		if( navigator.geolocation )
+	    {
+	       navigator.geolocation.getCurrentPosition(function success(position)
+			{	
+				ciudad = {lat: position.coords.latitude, lng: position.coords.longitude};
+			}, function() {
+			    console.log('Tu ubicacion no se conoce');
+			});
+	    }
+	    else
+	    {
+	       alert("Lo siento, tu navegador no proporciona geolocalización.");
+	    }
+	$(document).ready(function() {
+	    $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/CastilloNievasJuanManuel/rest/catalogo",
+            dataType: "html",
+            success: function(response) {
+                $('#catalogue').html(response);
+            }
+        });
+	    $('#button2').on('click', function(){
+	        $.ajax({
+	            type: "GET",
+	            url: "http://localhost:8080/CastilloNievasJuanManuel",
+	            dataType: "html",
+	            success: function(response) {
+	            	window.location.href = "modifyOrAddProduct.html";
+	            }
+	        });
+	    });
+	    $('#button3').on('click', function(){
+	        $.ajax({
+	            type: "GET",
+	            url: "http://localhost:8080/CastilloNievasJuanManuel",
+	            dataType: "html",
+	            success: function(response) {
+	            	window.location.href = "carrito.html";
+	            }
+	        });
+	    });
+	});
+	function initMap() {
+		const ciudad = { lat: 40.416705, lng: -3.703582 };
+		const map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 15,
+			center: ciudad,
+		});
+		const marker = new google.maps.Marker({
+			position: ciudad,
+			map: map,
+		});
+	}
+	</script>
+</head>
+<body>
+	<div class="jumbotron">
+		<h1>Pr&aacute;ctica 2 - DSBCS</h1>      
+		<p><em>Juan Manuel Castillo Nievas</em></p>
+		<p><b>Administrador - A&ntilde;adir, modificar o eliminar productos</b></p>
+	</div>
+
+	<p style="width: 80%; margin: 0 auto; margin-bottom: 20px;"><b>Ubicaci&oacute;n de nuestra tienda:</b></p>
+	<div id="map" style="width: 80%; height: 200px; margin: 0 auto; margin-bottom: 30px;"></div>
+
+	<div class="container">
+		<button id="button3" type="button" class="btn btn-secondary">Ir a la interfaz del cliente</button>
+	</div>
+	<div class="container" style="height: 50px"></div>
+
+	<div class="container">
+		<h3><u>Cat&aacute;logo de productos</u></h3>
+		<p><b>Aqu&iacute; se muestran los productos que est&aacute;n actualmente en el cat&aacute;logo. Se pueden a&ntilde;adir, eliminar o modificar productos.</b></p>
+	</div>
+	<div id="catalogue" class="container">
+	</div>
+
+	<div class="container">
+		<button id="button2" type="button" class="btn btn-primary" style="margin-bottom: 50px;">A&ntilde;adir o modificar producto</button>
+	</div>
+   
+</body>
+</html> 
+
+ 

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<title>A&ntilde;adir producto al carrito</title>
+
+	<style>
+		h1 {
+			font-size: 2.5rem !important;
+			margin-bottom: .5rem;
+		    font-family: inherit;
+		    font-weight: 500;
+		    line-height: 1.2;
+		    color: inherit;
+		    margin-top: 0;
+		}
+		.jumbotron {
+			padding: 2rem 2rem;
+		}
+		.jumbotron p {
+			font-size: 15px;
+		}
+		.form-group{
+			display: flex;
+		}
+		.buttons{
+			justify-content: center;
+		}
+	</style>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    
+	    $('#button1').on('click', function(){
+	        $.ajax({
+	            type: "GET",
+	            url: "http://localhost:8080/CastilloNievasJuanManuel/",
+	            success: function(response) {
+	            	window.location.href = "carrito.html";
+	            }
+	        });
+	    });
+	});
+	</script>
+</head>
+<body>
+	<div class="jumbotron">
+		<h1>Pr&aacute;ctica 2 - DSBCS</h1>      
+		<p><em>Juan Manuel Castillo Nievas</em></p>
+		<p><b>A&ntilde;adir producto al carrito</b></p>
+	</div>
+  <div class="container">
+    <form class="well form-horizontal" action="http://localhost:8080/CastilloNievasJuanManuel/rest/catalogo/carrito" method="post" id="contact_form">
+      <fieldset>
+
+      <!-- Form Name -->
+      <legend><center><h2><b>A&ntilde;adir producto al carrito</b></h2></center></legend><br>
+      <!-- Text input-->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">ID</label>  
+        <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input  name="id" placeholder="ID" class="form-control"  type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" >Cantidad</label> 
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input name="cantidad" placeholder="Cantidad" class="form-control"  type="text">
+          </div>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="form-group buttons">
+        <div class="">
+        	<button id="button1" type="button" class="btn btn-primary">Volver al carrito</button>
+        </div>
+        <div class="">
+          <button type="submit" class="btn btn-warning" >A&ntilde;adir <span class="glyphicon glyphicon-send"></span></button>
+        </div>
+      </div>
+
+      </fieldset>
+    </form>
+  </div><!-- /.container -->
+
+</body>
+</html>
